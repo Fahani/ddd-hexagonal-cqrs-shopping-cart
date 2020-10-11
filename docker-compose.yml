@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+
+  #PHP Service
+  project-shopping-cart-php:
+    build:
+      context: docker/php-fpm
+      args:
+        user: nico
+        uid: 1000
+    container_name: project-shopping-cart-php
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/conf/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - project-shopping-cart-network
+
+#Docker Networks
+networks:
+  project-shopping-cart-network:
+    driver: bridge
+
